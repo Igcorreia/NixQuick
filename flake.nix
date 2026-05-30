@@ -5,32 +5,47 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:denful/import-tree";
+    easy-hosts.url = "github:tgirlcloud/easy-hosts";
+
+    
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, flake-parts, import-tree, ... }:
+  outputs =
+    inputs@{
+      nixpkgs,
+      flake-parts,
+      import-tree,
+      ...
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      debug = true;
       systems = [ "x86_64-linux" ];
-      
-      flake = {
-        nixosConfigurations.zenko = inputs.nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            (import-tree ./packages)
-            (import-tree ./modules)
-            (import-tree ./hosts)
-            (import-tree ./homes)
-          ];
-        };
+      imports = [
+        (import-tree ./lib)
+        (import-tree ./modules)
+        inputs.easy-hosts.flakeModule
+      ];
+
+      easy-hosts = {
+        path = ./hosts;
+        autoConstruct = true;
       };
-      
-      perSystem = { pkgs, ... }: {
-        devShells.default = pkgs.mkShell {
-          buildInputs = [
-            pkgs.nixd
-            pkgs.nixfmt
-          ];
+
+      # Development Shell For This Configuration
+      # Start with "nix develop"
+      perSystem =
+        { pkgs, ... }:
+        {
+          devShells.default = pkgs.mkShell {
+            buildInputs = [
+              pkgs.nixd
+              pkgs.nixfmt
+            ];
+          };
         };
-      };
     };
 }

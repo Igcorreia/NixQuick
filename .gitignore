@@ -1,1 +1,5 @@
 .direnv
+.claude
+
+# TODO: Remove docs once docs are finished writing
+docs
