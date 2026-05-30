@@ -25,7 +25,7 @@
       debug = true;
       systems = [ "x86_64-linux" ];
       imports = [
-        # (import-tree ./lib)
+        (import-tree ./lib)
         (import-tree ./modules)
         inputs.easy-hosts.flakeModule
       ];
@@ -51,7 +51,7 @@
             ];
 
             shellHook = ''
-              alias netdev='sudo pixiecore boot ${inputs.self.nixosConfigurations.installer.config.system.build.kernel}/bzImage ${inputs.self.nixosConfigurations.installer.config.system.build.netbootRamdisk}/initrd --cmdline "init=${inputs.self.nixosConfigurations.installer.config.system.build.toplevel}/init"'
+              alias netdev='sudo pixiecore boot ${inputs.self.nixosConfigurations.installer.config.system.build.kernel}/bzImage ${inputs.self.nixosConfigurations.installer.config.system.build.netbootRamdisk}/initrd --cmdline "init=${inputs.self.nixosConfigurations.installer.config.system.build.toplevel}/init" --listen-addr enp0s20f0u1u3'
 
               echo "-----Zenko64's NixOS Development Shell-----"
               echo "Aliases:"
