@@ -11,7 +11,7 @@
     {
       options.${namespace} = {
         desktop = {
-          enable = lib.mkEnableOption "desktop environment support";
+          enable = lib.mkEnableOption "Desktop Environment Support.";
         };
         greeter = lib.mkOption {
           type = lib.types.enum [
@@ -19,7 +19,7 @@
             "greetd"
           ];
           default = null;
-          description = "Login greeter to enable.";
+          description = "Login Greeter To Enable.";
         };
 
       };

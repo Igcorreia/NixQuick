@@ -33,7 +33,11 @@ in
           description = "Wallpaper to apply to the desktop environment.";
         };
       };
-      config.stylix.image = config.${namespace}.desktop.wallpaper;
+
+      # If statement stops null value from overriding theme images
+      config.stylix.image = lib.mkIf (
+        config.${namespace}.desktop.wallpaper != null
+      ) config.${namespace}.desktop.wallpaper;
     };
 
   # Home-Manager Overrides
@@ -57,7 +61,11 @@ in
           default = osConfig.${namespace}.desktop.wallpaper;
           description = "Wallpaper to apply to the desktop environment.";
         };
-        config.stylix.image = config.${namespace}.desktop.wallpaper;
       };
+
+      # If statement stops null value from overriding theme images
+      config.stylix.image = lib.mkIf (
+        config.${namespace}.desktop.wallpaper != null
+      ) config.${namespace}.desktop.wallpaper;
     };
 }

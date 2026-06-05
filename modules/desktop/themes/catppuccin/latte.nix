@@ -2,11 +2,11 @@
 { ... }:
 let
   themeName = "catppuccin-latte";
-  theme = pkgs: {
+  theme = pkgs: lib: {
     stylix = {
       enable = true;
       polarity = "light";
-      image = ./light.png;
+      image = lib.mkDefault ./light.png;
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
 
@@ -37,7 +37,7 @@ in
       ...
     }:
     {
-      config = lib.mkIf (config.${namespace}.desktop.theme == themeName) (theme pkgs);
+      config = lib.mkIf (config.${namespace}.desktop.theme == themeName) (theme pkgs lib);
     };
 
   flake.modules.homeManager.desktop =
@@ -49,6 +49,6 @@ in
       ...
     }:
     {
-      config = lib.mkIf (config.${namespace}.desktop.theme == themeName) (theme pkgs);
+      config = lib.mkIf (config.${namespace}.desktop.theme == themeName) (theme pkgs lib);
     };
 }

@@ -2,7 +2,7 @@
 { ... }:
 let
   themeName = "tokyo-night-storm";
-  theme = pkgs: {
+  theme = pkgs: lib: {
     stylix = {
       enable = true;
       polarity = "dark";
@@ -36,7 +36,7 @@ in
       ...
     }:
     {
-      config = lib.mkIf (config.${namespace}.desktop.theme == themeName) (theme pkgs);
+      config = lib.mkIf (config.${namespace}.desktop.theme == themeName) (theme pkgs lib);
     };
 
   flake.modules.homeManager.desktop =
@@ -48,6 +48,6 @@ in
       ...
     }:
     {
-      config = lib.mkIf (config.${namespace}.desktop.theme == themeName) (theme pkgs);
+      config = lib.mkIf (config.${namespace}.desktop.theme == themeName) (theme pkgs lib);
     };
 }

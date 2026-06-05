@@ -4,7 +4,11 @@
   ...
 }:
 {
-  local.desktop.theme = "catppuccin-frappe";
+  local.desktop = {
+    enable = true;
+    theme = "catppuccin-mocha";
+    wallpaper = ../wallpapers/Koi.png;
+  };
 
   home.packages = with pkgs; [
     hyprpaper
