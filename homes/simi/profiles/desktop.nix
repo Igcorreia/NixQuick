@@ -6,10 +6,6 @@
 {
   local.desktop.theme = "catppuccin-frappe";
 
-  stylix = {
-    image = ../wallpapers/Koi.png;
-  };
-
   home.packages = with pkgs; [
     hyprpaper
     # Desktop Apps

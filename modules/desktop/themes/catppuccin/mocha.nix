@@ -6,6 +6,7 @@ let
     stylix = {
       enable = true;
       polarity = "dark";
+      image = ./dark.png;
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
 
