@@ -5,8 +5,7 @@
 }:
 {
   local.desktop = {
-    enable = true;
-    theme = "catppuccin-mocha";
+    theme = "catppuccin-macchiato";
     wallpaper = ../wallpapers/Koi.png;
   };
 

@@ -25,7 +25,10 @@
       };
 
       config = lib.mkIf config.${namespace}.desktop.enable {
-        programs.dconf.enable = true;
+        programs = {
+          dconf.enable = true;
+          uwsm.enable = true;
+        };
 
         services.gvfs.enable = true;
         services.libinput.enable = true;

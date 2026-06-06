@@ -1,4 +1,11 @@
 # Hyprland Window Manager Module
+{ ... }:
+let
+  shells = [
+    "ashell"
+    "caelestia"
+  ];
+in
 {
   flake.modules.nixos.desktop =
     {
@@ -8,15 +15,20 @@
       ...
     }:
     {
-      options.${namespace}.desktop.compositors.hyprland = {
+      options.${namespace}.desktop.environments.hyprland = {
         enable = lib.mkOption {
           type = lib.types.bool;
           default = false;
           description = "Enables the Hyprland Window Manager.";
         };
+        shell = lib.mkOption {
+          type = lib.types.nullOr (lib.types.enum shells);
+          default = null;
+          description = "Hyprland Shell To Use.";
+        };
       };
 
-      config = lib.mkIf config.${namespace}.desktop.compositors.hyprland.enable {
+      config = lib.mkIf config.${namespace}.desktop.environments.hyprland.enable {
         ${namespace}.desktop.enable = true;
         programs.hyprland = {
           enable = true;
