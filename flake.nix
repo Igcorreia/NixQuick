@@ -5,10 +5,16 @@
     # System
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware = {
+      # Hardware Specific Patches (Check Repo For How-To-Use)
       url = "github:NixOS/nixos-hardware";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    disko.url = "github:nix-community/disko";
+    disko.url = "github:nix-community/disko"; # Auto-Disk Formatting
+    lanzaboote = {
+      # Secure Boot
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Frameworks
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -24,6 +30,7 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
   outputs =
@@ -86,6 +93,7 @@
             modules = [
               # Libs
               inputs.disko.nixosModules.disko
+              inputs.lanzaboote.nixosModules.lanzaboote
 
               # Core Modules
               config.flake.modules.nixos.core

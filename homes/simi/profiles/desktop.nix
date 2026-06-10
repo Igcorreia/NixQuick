@@ -27,6 +27,15 @@
     hyprpaper
     cmatrix
     pipes-rs
+
+    # Tools
+    gotop
+  ];
+
+  # Auto-Start Applications
+  wayland.windowManager.hyprland.settings.exec-once = [
+    "discord"
+    "steam"
   ];
 
   programs = {

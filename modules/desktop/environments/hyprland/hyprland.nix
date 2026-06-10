@@ -30,6 +30,8 @@ in
       };
 
       config = lib.mkIf config.${namespace}.desktop.environments.hyprland.enable {
+        xdg.portal.enable = true;
+
         programs.hyprland = {
           enable = true;
           withUWSM = true;
@@ -81,7 +83,6 @@ in
         services = {
           hypridle = {
             # WARN: Turning the display off before locking the screen can result in you getting stuck in a blackscreen.
-            enable = false;
             settings = {
               general = {
                 before-sleep = "hyprlock";
@@ -102,6 +103,7 @@ in
             };
           };
         };
+        systemd.user.services.hypridle = lib.mkForce {};
 
         programs = {
           hyprlock = {
@@ -143,8 +145,6 @@ in
         wayland.windowManager.hyprland = {
           enable = true;
           configType = "hyprlang";
-          package = null;
-          portalPackage = null;
           systemd.enable = false;
 
           settings = {

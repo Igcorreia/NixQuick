@@ -32,7 +32,10 @@
   ];
 
   boot.loader.timeout = 0;
-  boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
+
+  # After using EDK2 Shell, Please Disable It, For Security.
+  # boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
+
   # efiDeviceHandle obtained via EDK2 UEFI Shell.
   boot.loader.systemd-boot.windows."00-windows" = {
     title = "Windows";

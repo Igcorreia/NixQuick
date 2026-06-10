@@ -1,12 +1,41 @@
 # Boot & Kernel
 {
   flake.modules.nixos.core =
-    { lib, pkgs, ... }:
+    {config,
+      namespace,
+      lib,
+      pkgs,
+      ...
+    }:
     {
-      boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+      options.${namespace}.boot.secureBoot = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable Secure Boot.";
+      };
 
-      boot.loader.efi.canTouchEfiVariables = true;
-      boot.loader.systemd-boot.editor = false; # Security Measure
-      boot.loader.systemd-boot.enable = true;
+      config = {
+        boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+
+        boot.loader.efi.canTouchEfiVariables = true;
+        boot.loader.systemd-boot.editor = false; # Security Measure
+
+        # Lanzaboote overrides Default SystemD-Boot, it must be disabled.
+        boot.loader.systemd-boot.enable = lib.mkForce (!config.${namespace}.boot.secureBoot);
+
+        environment.systemPackages = lib.mkIf config.${namespace}.boot.secureBoot [
+          pkgs.sbctl
+        ];
+
+        boot.lanzaboote = lib.mkIf config.${namespace}.boot.secureBoot {
+          enable = true;
+          pkiBundle = "/var/lib/sbctl";
+          autoGenerateKeys.enable = true;
+          autoEnrollKeys = {
+            enable = true;
+            autoReboot = true;
+          };
+        };
+      };
     };
 }

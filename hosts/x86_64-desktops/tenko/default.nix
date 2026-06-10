@@ -15,7 +15,9 @@
     #  "loglevel=3"
     #  "rd.udev.log_level=3"
     #];
-    loader.systemd-boot.edk2-uefi-shell.enable = true;
+
+    # After using EDK2 Shell, Please Disable It, For Security.
+    # loader.systemd-boot.edk2-uefi-shell.enable = true;
 
     # Boot Instantly. To see the bootmenu, hold space during boot.
     loader.timeout = 0;
