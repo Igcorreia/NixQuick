@@ -18,11 +18,20 @@
           {
             programs.ashell.enable = true;
 
-            home.packages = with pkgs; [
-              mako
-              elephant
-              walker
-            ];
+            # We have to do this because Home-Manager needs to auto-style it
+            services = {
+              mako.enable = true;
+              elephant.enable = true;
+              walker.enable = true;
+            };
+
+            # We don't want these to be started by SystemD because it might interfere with other compositors
+            # Force Disable SystemD services
+            systemd.user.services = {
+              mako = lib.mkForce { };
+              elephant = lib.mkForce { };
+              walker = lib.mkForce { };
+            };
 
             wayland.windowManager.hyprland.settings = {
               exec-once = [

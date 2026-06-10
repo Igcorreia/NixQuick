@@ -6,8 +6,6 @@
     home = "/home/simi";
     createHome = true;
     extraGroups = [ "wheel" ];
-    initialPassword = "password";
-
   };
 
   # Don't use Relative Paths as it is impure. Always append the path to inputs.self, as inputs.self leads to the root.
