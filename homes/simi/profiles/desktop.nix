@@ -32,11 +32,18 @@
     gotop
   ];
 
-  # Auto-Start Applications
-  wayland.windowManager.hyprland.settings.exec-once = [
-    "discord"
-    "steam"
-  ];
+  xdg.desktopEntries.steam = {
+    name = "Steam";
+    exec = "uwsm app -- steam %U";
+    icon = "steam";
+    terminal = false;
+    type = "Application";
+    categories = [ "Network" "FileTransfer" "Game" ];
+    mimeType = [
+      "x-scheme-handler/steam"
+      "x-scheme-handler/steamlink"
+    ];
+  };
 
   programs = {
     fish.enable = true;

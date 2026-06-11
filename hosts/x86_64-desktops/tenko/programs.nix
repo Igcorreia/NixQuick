@@ -3,6 +3,9 @@
 {
   programs = {
     nix-ld.enable = true;
+    
+    gamescope.enable = true;
+    steam.gamescopeSession.enable = true;
     steam.enable = true;
   };
 

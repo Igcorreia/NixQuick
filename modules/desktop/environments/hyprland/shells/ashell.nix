@@ -38,7 +38,7 @@
                 "uwsm app -- ${lib.getExe pkgs.ashell}"
                 "uwsm app -- ${lib.getExe pkgs.mako}"
                 "uwsm app -- ${lib.getExe pkgs.elephant}"
-                "uwsm app -- ${lib.getExe pkgs.walker} --gapplication-service"
+                "uwsm app -- sh -c \"${lib.getExe pkgs.walker} --gapplication-service\""
               ];
               bind = [
                 "SUPER, R, exec, ${lib.getExe pkgs.walker}"

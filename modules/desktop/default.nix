@@ -16,6 +16,11 @@
         brightnessctl
       ];
 
+      environment.variables = {
+        NIXOS_OZONE_WL = "1";
+        ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      };
+
       # System Fonts
       fonts.packages = with pkgs; [
         nerd-fonts.jetbrains-mono
@@ -23,9 +28,11 @@
     };
 
   flake.modules.homeManager.desktop =
-    { ... }:
+    { config, ... }:
     {
       xdg = {
+        configFile."uwsm/env".source =
+          "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
         mime.enable = true;
         userDirs = {
           enable = true;

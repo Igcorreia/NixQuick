@@ -72,6 +72,7 @@ in
         home.packages = with pkgs; [
           hyprpaper
           hypridle
+          hyprpolkitagent
           cliphist
           grimblast
           libnotify
@@ -147,9 +148,15 @@ in
           configType = "hyprlang";
           systemd.enable = false;
 
+          # Use the host portal and package configuration.
+          # Don't remove this
+          package = null;
+          portalPackage = null;
+
           settings = {
             # Initial Execution
             exec-once = [
+              "uwsm app -- ${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent"
               "uwsm app -- ${lib.getExe pkgs.hyprpaper}"
               "uwsm app -- ${lib.getExe pkgs.hypridle}"
               "uwsm app -- ${lib.getExe pkgs.cliphist}"
