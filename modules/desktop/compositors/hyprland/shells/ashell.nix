@@ -21,11 +21,8 @@
               hyprlock.enable = true;
             };
 
-            services = {
-              mako.enable = true;
-              elephant.enable = true;
-              walker.enable = true;
-            };
+            services.mako.enable = true;
+            
 
             # Binds
             wayland.windowManager.hyprland.settings = {
@@ -47,7 +44,6 @@
 
             programs.ashell = {
               enable = true;
-              systemd.enable = true;
               settings = {
                 log_level = "warn";
 

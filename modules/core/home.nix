@@ -11,7 +11,8 @@
         useUserPackages = true;
         extraSpecialArgs = { inherit inputs namespace; };
 
-        # Import Shared Home-Manager Modules
+        # Import Core Shared Home-Manager Modules
+        # Extend This Per-Module
         sharedModules = [
           (
             { osConfig, ... }:
@@ -19,7 +20,6 @@
               home.stateVersion = osConfig.system.stateVersion;
             }
           )
-          inputs.self.modules.homeManager.desktop
         ];
       };
     };

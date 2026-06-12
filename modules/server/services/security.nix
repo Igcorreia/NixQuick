@@ -31,14 +31,6 @@
             "127.0.0.1/8"
             "::1/128"
           ];
-
-          jails = {
-            sshd = ''
-              enabled = true;
-              port = ${lib.concatMapStringsSep "," toString config.services.openssh.ports};
-              filter = sshd
-            '';
-          };
         };
       };
     };
