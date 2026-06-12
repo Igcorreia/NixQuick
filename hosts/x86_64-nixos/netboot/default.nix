@@ -1,10 +1,12 @@
 # X86 NixOS Installer PXE Configuration
-{ modulesPath, ... }:
+{ namespace, modulesPath, ... }:
 let
   sshPubKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILQyfvGLHb+gMY1dzUZp1ckpktrdF204scLSJc/wxVq0 simi@zenko";
 in
 {
   imports = [ "${modulesPath}/installer/netboot/netboot.nix" ];
+
+  ${namespace}.boot.secureBoot = false;
 
   services.getty.autologinUser = "root";
   services.openssh = {

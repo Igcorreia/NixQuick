@@ -111,9 +111,14 @@
         perSystem =
           { pkgs, ... }:
           let
-            installer = inputs.self.nixosConfigurations.installer.config.system.build;
+            netboot = inputs.self.nixosConfigurations.netboot.config.system.build;
+            iso = inputs.self.nixosConfigurations.iso.config.system.build.isoImage;
           in
           {
+            packages = {
+              iso = iso;
+              default = iso;
+            };
             devShells.default = pkgs.mkShell {
               buildInputs = [
                 pkgs.nixd
@@ -128,8 +133,8 @@
                 # Requires a DHCP server and internet on the LAN.
                 (pkgs.writeShellScriptBin "netboot" ''
                   sudo ${pkgs.pixiecore}/bin/pixiecore \
-                    boot ${installer.kernel}/bzImage ${installer.netbootRamdisk}/initrd \
-                    --cmdline "init=${installer.toplevel}/init loglevel=4" --debug \
+                    boot ${netboot.kernel}/bzImage ${netboot.netbootRamdisk}/initrd \
+                    --cmdline "init=${netboot.toplevel}/init loglevel=4" --debug \
                     --dhcp-no-bind \
                     --port 64172 --status-port 64172 "$@"
                 '')
