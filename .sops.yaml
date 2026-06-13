@@ -1,0 +1,27 @@
+keys:
+  # Administrator Key "ssh-to-age -i ~/.ssh/id_ed25519.pub" (Decryption done with Portable SSH PrivateKey)
+  - &admin age1c9plrjxglcrepqjujaz7kz46s05tlh33ztr6x5fe83gwuq0jzsxqdr527n
+
+  # Connect to target host and run "ssh-keyscan targethost.local | ssh-to-age"
+  # WARNING: These change per-install. If the OS is reinstalled, these must be reset.
+  - &siminet-01 age1...
+  - &siminet-02 age1...
+  - &siminet-03 age1r5u55x3t63dmqxclrmrcv0aa24h82e8vukxrpufpsnkqk3nf6egsajtcqp
+  - &siminet-04 age1...
+
+creation_rules:
+  - path_regex: hosts/x86_64-servers/siminet-01/secrets/.*\.yaml$
+    key_groups:
+      - age: [*admin, *siminet-01]
+
+  - path_regex: hosts/x86_64-servers/siminet-02/secrets/.*\.yaml$
+    key_groups:
+      - age: [*admin, *siminet-02]
+
+  - path_regex: hosts/x86_64-servers/siminet-03/secrets/.*\.yaml$
+    key_groups:
+      - age: [*admin, *siminet-03]
+
+  - path_regex: hosts/x86_64-servers/siminet-04/secrets/.*\.yaml$
+    key_groups:
+      - age: [*admin, *siminet-04]

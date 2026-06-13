@@ -1,5 +1,5 @@
 # The Networking Module
-# These Options Can Be Overriden Directly On Each Host.
+# Override Default Settings Put Here Per Host.
 {
   flake.modules.nixos.core =
     { ... }:

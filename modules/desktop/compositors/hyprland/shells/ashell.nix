@@ -16,11 +16,10 @@
             && config.${namespace}.desktop.compositors.hyprland.shell == "ashell"
           )
           {
-            # Software
+            # Required Software
             programs = {
               hyprlock.enable = true;
             };
-
             services = {
               mako.enable = true;
               elephant.enable = true;

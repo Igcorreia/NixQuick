@@ -24,6 +24,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Desktops
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
@@ -96,6 +100,7 @@
             modules = [
               # Libs
               inputs.disko.nixosModules.disko
+              inputs.sops-nix.nixosModules.sops-nix
               inputs.lanzaboote.nixosModules.lanzaboote
 
               # Core Modules
@@ -123,6 +128,9 @@
               buildInputs = [
                 pkgs.nixd
                 pkgs.nixfmt
+                
+                # Feature CLIs
+                pkgs.sops
 
                 # Lab testing machine
                 pkgs.dnsmasq
@@ -139,6 +147,16 @@
                     --port 64172 --status-port 64172 "$@"
                 '')
               ];
+
+              shellHook = ''
+                sops git-hook install
+
+                # Intro Message
+                echo "-----Zenko64's NixOS Development Shell-----"
+                echo "Commands:"
+                echo " - netboot: Start Installer PXEServer with OpenSSH Enabled."
+                echo "-------------------------------------------"
+              '';
             };
           };
       }
