@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.server =
-    { config, lib, ... }:
+    { ... }:
     {
       security = {
         # Enable process confinement

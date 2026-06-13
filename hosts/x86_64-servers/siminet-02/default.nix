@@ -13,4 +13,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "Europe/Lisbon";
   zramSwap.enable = true;
+
+  system.stateVersion = "26.11";
 }

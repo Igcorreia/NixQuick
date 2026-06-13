@@ -3,6 +3,7 @@
   namespace,
   inputs,
   modulesPath,
+  pkgs,
   ...
 }:
 let
@@ -13,7 +14,19 @@ in
 
   ${namespace}.boot.secureBoot = false;
 
-  environment.etc."nixos".source = inputs.self;
+  boot.blacklistedKernelModules = [ "nouveau" ];
+
+  environment = {
+    etc."nixos".source = inputs.self;
+    systemPackages = with pkgs; [
+      inputs.disko.packages.${pkgs.stdenv.hostPlatform.system}.disko
+      inputs.disko.packages.${pkgs.stdenv.hostPlatform.system}.disko-install
+
+      git
+      vim
+    ];
+  };
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
