@@ -100,7 +100,7 @@
             modules = [
               # Libs
               inputs.disko.nixosModules.disko
-              inputs.sops-nix.nixosModules.sops-nix
+              inputs.sops-nix.nixosModules.sops
               inputs.lanzaboote.nixosModules.lanzaboote
 
               # Core Modules
@@ -128,7 +128,7 @@
               buildInputs = [
                 pkgs.nixd
                 pkgs.nixfmt
-                
+
                 # Feature CLIs
                 pkgs.sops
 

@@ -1,7 +1,7 @@
 { ... }:
 # Most stuff is handled by nixos-hardware
 {
-#  nixpkgs.config.cudaSupport = true;
+  #  nixpkgs.config.cudaSupport = true;
   hardware = {
     graphics = {
       enable = true;

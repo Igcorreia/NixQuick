@@ -9,7 +9,7 @@ in
     isNormalUser = true;
     home = "/home/simi";
     shell = pkgs.fish;
-    hashedPassword = "$y$j9T$tjs435fHbjQ.5SGhfWQP2.$eY6O.M606bYPymg/JU3rFNEWWLkIBba4JYAaU0gEmG4";
+    initialPassword = "simi";
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [ sshPubKey ];
   };

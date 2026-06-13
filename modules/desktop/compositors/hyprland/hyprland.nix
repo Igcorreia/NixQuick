@@ -2,6 +2,7 @@
 { ... }:
 let
   shells = [
+    "waybar"
     "ashell"
     "caelestia"
   ];

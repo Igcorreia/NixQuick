@@ -3,7 +3,7 @@
 {
   programs = {
     nix-ld.enable = true;
-    
+
     gamescope = {
       enable = true;
       capSysNice = true;
