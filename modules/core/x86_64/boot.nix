@@ -1,4 +1,4 @@
-# Boot & Kernel
+# Bootloader
 {
   flake.modules.nixos.x86_64 =
     {
