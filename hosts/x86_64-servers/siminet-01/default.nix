@@ -1,5 +1,5 @@
 # Main Host Configuration
-# TODO: Configure Server GPU
+# Homelab EntryPoint
 { ... }:
 {
   imports = [
@@ -8,6 +8,26 @@
     ./services.nix
     ./programs.nix
   ];
+
+  networking = {
+    useDHCP = false;
+    interfaces.eth0 = {
+      ipv4.addresses = [
+        {
+          address = "192.168.0.2";
+          prefixLength = 24;
+        }
+      ];
+    };
+    defaultGateway = {
+      address = "192.168.0.1";
+      interface = "eth0";
+    };
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
+  };
 
   console.keyMap = "pt-latin1";
   i18n.defaultLocale = "en_US.UTF-8";
