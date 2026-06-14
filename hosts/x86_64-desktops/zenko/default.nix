@@ -34,7 +34,6 @@
   ];
 
   boot.loader.timeout = 0;
-  
 
   # After using EDK2 Shell, Please Disable It, For Security.
   # boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
