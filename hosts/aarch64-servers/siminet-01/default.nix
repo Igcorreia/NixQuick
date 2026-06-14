@@ -1,9 +1,9 @@
 # Main Host Configuration
 # Homelab EntryPoint
-{ modulesPath, ... }:
+{ inputs, ... }:
 {
   imports = [
-    "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
+    inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ./users.nix
     ./services.nix
     ./programs.nix

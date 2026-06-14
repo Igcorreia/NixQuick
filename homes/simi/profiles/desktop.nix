@@ -9,9 +9,16 @@
     wallpaper = null;
   };
 
+  stylix.image = null;
   services.linux-wallpaperengine = {
     enable = true;
     assetsPath = "/mnt/files/Games/Steam/steamapps/common/wallpaper_engine/assets";
+    wallpapers = [
+      {
+        monitor = "eDP-1";
+        wallpaperId = "3397664520";
+      }
+    ];
   };
 
   home.packages = with pkgs; [
