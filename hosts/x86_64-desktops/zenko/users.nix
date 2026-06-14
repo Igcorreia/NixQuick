@@ -1,11 +1,13 @@
 # Users and Home Configurations
-{ inputs, ... }:
+{ pkgs, inputs, ... }:
 {
   users.users.simi = {
     isNormalUser = true;
     home = "/home/simi";
     createHome = true;
+    initialPassword = "simi";
     extraGroups = [ "wheel" ];
+    shell = pkgs.fish;
   };
 
   # Don't use Relative Paths as it is impure. Always append the path to inputs.self, as inputs.self leads to the root.

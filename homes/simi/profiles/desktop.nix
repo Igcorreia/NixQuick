@@ -6,7 +6,7 @@
 {
   local.desktop = {
     theme = "catppuccin-macchiato";
-    wallpaper = ../Clouds.png;
+    wallpaper = ../wallpapers/Clouds.png;
   };
 
   home.packages = with pkgs; [

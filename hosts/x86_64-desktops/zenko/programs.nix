@@ -4,6 +4,8 @@
   programs = {
     nix-ld.enable = true;
 
+    fish.enable = true;
+
     gamescope = {
       enable = true;
       capSysNice = true;
