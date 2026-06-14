@@ -10,6 +10,9 @@
     ./users.nix
   ];
 
+  # For compiling aarch64 SDImage by pulling closure (CC Hashes are different, no cache entries, this emulates it allowing closure to be pulled from cache since it's not CC)
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   local = {
     desktop = {
       theme = "catppuccin-mocha";
@@ -31,6 +34,7 @@
   ];
 
   boot.loader.timeout = 0;
+  
 
   # After using EDK2 Shell, Please Disable It, For Security.
   # boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
