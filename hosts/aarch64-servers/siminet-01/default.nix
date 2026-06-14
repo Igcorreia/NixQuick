@@ -4,7 +4,6 @@
 {
   imports = [
     "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
-    ./disko.nix
     ./users.nix
     ./services.nix
     ./programs.nix
