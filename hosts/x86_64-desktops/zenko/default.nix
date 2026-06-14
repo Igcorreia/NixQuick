@@ -15,7 +15,7 @@
       theme = "catppuccin-mocha";
       compositors.hyprland = {
         enable = true;
-        shell = "waybar";
+        shell = "ashell";
       };
       greeter = "tuigreet";
     };
