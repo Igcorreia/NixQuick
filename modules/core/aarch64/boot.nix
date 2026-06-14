@@ -1,6 +1,6 @@
 # Bootloader
 {
-  flake.modules.nixos.x86_64 =
+  flake.modules.nixos.aarch64 =
     {
       lib,
       ...
