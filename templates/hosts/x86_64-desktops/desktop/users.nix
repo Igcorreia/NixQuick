@@ -19,6 +19,6 @@ in
   # Don't use Relative Paths as it is impure.
   # Always append the path to inputs.self, as inputs.self leads to the root of the flake.
   home-manager.users.user.imports = [
-    "${inputs.self}/homes/_template/profiles/server.nix"
+    "${inputs.self}/homes/user/profiles/desktop.nix"
   ];
 }
