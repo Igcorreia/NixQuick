@@ -1,13 +1,8 @@
 # Nix Daemon Configuration Module
 {
   flake.modules.nixos.core =
-    { inputs, ... }:
+    { ... }:
     {
-      nixpkgs.overlays = [
-        # Overlay the exported packages into pkgs.${namespace}
-        inputs.self.overlays.default
-      ];
-
       nix.settings = {
         substituters = [
           # Caches

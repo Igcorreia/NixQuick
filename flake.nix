@@ -128,6 +128,9 @@
               inputs.lanzaboote.nixosModules.lanzaboote
               inputs.nix-topology.nixosModules.default
 
+              # Inject the flake package overlays into all systems under nixpkgs (pkgs.${namespace})
+              { nixpkgs.overlays = [ config.flake.overlays.default ]; }
+
               # Core Modules
               config.flake.modules.nixos.core
             ];
