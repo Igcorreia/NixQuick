@@ -4,7 +4,7 @@ keys:
 
   # Connect to target host and run "ssh-keyscan targethost.local | ssh-to-age"
   # WARNING: These change per-install. If the OS is reinstalled, these must be reset.
-  - &hassServer age14ex4w7r0tqjkuj7a6vm0mqcgqs22qd6rehydekjtvd5g3sjx4u4qge30w0
+  - &hassServer age1dqlj3554eljkgm52nujy22446mymz86p6f0kv9d6y37u7a8hf9vs95240s
 
 creation_rules:
   - path_regex: hosts/x86_64-servers/hassServer/secrets/.*\.yaml$
