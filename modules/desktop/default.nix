@@ -1,16 +1,10 @@
 {
   flake.modules.nixos.desktop =
     {
-      inputs,
       pkgs,
       ...
     }:
     {
-      # Inject Home-Manager Modules
-      home-manager.sharedModules = [
-        inputs.self.modules.homeManager.desktop
-      ];
-
       # System Dependencies
       networking.networkmanager.enable = true;
       programs = {
@@ -34,8 +28,16 @@
     };
 
   flake.modules.homeManager.desktop =
-    { config, ... }:
     {
+      pkgs,
+      config,
+      ...
+    }:
+    {
+      home.packages = with pkgs; [
+        pwvucontrol
+      ];
+
       xdg = {
         configFile."uwsm/env".source =
           "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
