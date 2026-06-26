@@ -84,6 +84,9 @@
           "x86_64-linux"
           "aarch64-linux"
         ];
+        
+        # Export flake modules
+        flake.flakeModules.default = flakeModules.default;
       }
     );
 }
