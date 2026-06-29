@@ -4,7 +4,7 @@
   hmExtra ? { ... }: { },
 }:
 {
-  flake.modules.nixos.themes =
+  flake.modules.nixos.desktop =
     {
       config,
       namespace,
@@ -21,7 +21,7 @@
       ];
     };
 
-  flake.modules.homeManager.themes =
+  flake.modules.homeManager.desktop =
     {
       config,
       namespace,

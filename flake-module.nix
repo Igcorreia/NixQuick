@@ -12,6 +12,7 @@
 {
   # Flake Modules To Import (Flake-Parts only)
   imports = [
+    # Libraries
     inputs.disko.flakeModule
     inputs.easy-hosts.flakeModule
     inputs.flake-parts.flakeModules.modules
@@ -19,9 +20,19 @@
     inputs.home-manager.flakeModules.home-manager
     inputs.nix-topology.flakeModule
 
-    (import-tree ./lib)
+    # Flake-Wide Namespace Options
+    (
+      { lib, ... }:
+      {
+        options.namespace = lib.mkOption {
+          type = lib.types.str;
+          default = "local";
+          description = "Namespace that holds all module options.";
+        };
+      }
+    )
 
-    # Inject all the modules in the dirtree into flake-parts
+    # Main System Modules
     (import-tree ./modules)
   ];
 

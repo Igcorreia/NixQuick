@@ -7,8 +7,8 @@
 {
   local.desktop = {
     theme = "catppuccin-mocha";
-    wallpaper = ../wallpapers/Clouds.png; # Set the wallpaper for this user home
-    compositors.hyprland.shell = "caelestia"; # Shell for this user (pick one; override anywhere with one line)
+    wallpaper = ../wallpapers/Clouds.png; # Set the wallpaper
+    compositors.hyprland.shell = "caelestia";
   };
 
   # Copy the wallpapers directory to the user's home directory, at ~/.wallpapers

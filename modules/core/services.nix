@@ -6,7 +6,7 @@
       # AutoUpgrade
       system.autoUpgrade = {
         enable = true;
-        dates = "24:00";
+        dates = "00:00";
         allowReboot = false;
       };
 

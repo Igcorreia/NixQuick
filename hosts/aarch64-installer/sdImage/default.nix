@@ -10,8 +10,7 @@
   imports = [
     "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
   ];
-
-  # nixpkgs-unstable's kernel is newer than the current ZFS release (marked broken),
-  # and an installer SD image has no need for ZFS.
+  
+  # Fix random zfs issue that broke build. we dont need zfs either here
   boot.supportedFilesystems.zfs = lib.mkForce false;
 }
