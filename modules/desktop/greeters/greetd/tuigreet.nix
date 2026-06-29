@@ -1,6 +1,6 @@
 # Greetd Login Greeter
 {
-  flake.modules.nixos.desktop =
+  flake.modules.nixos.greeters =
     {
       config,
       lib,

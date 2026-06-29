@@ -9,10 +9,13 @@
       ...
     }:
     {
-      config =
-        lib.mkIf
+      config = lib.mkMerge [
+        # Self-register into the shell selector's allow-list.
+        { ${namespace}.desktop.compositors.hyprland._shells = [ "ashell" ]; }
+
+        (lib.mkIf
           (
-            osConfig.${namespace}.desktop.compositors.hyprland.enable == true
+            osConfig.${namespace}.desktop.compositors.hyprland.enable
             && config.${namespace}.desktop.compositors.hyprland.shell == "ashell"
           )
           {
@@ -30,11 +33,13 @@
 
             # Rules
             wayland.windowManager.hyprland.settings = {
-              gaps_out = "15 15 10 15";
+              general.gaps_out = lib.mkForce "15 15 0 15";
               exec-once = [ "uwsm app -- ashell" ];
               layerrule = [
                 "blur on, match:namespace ashell-main-layer"
-                "ignore_alpha 0, match:namespace ashell-main-layer"
+                "blur on, match:namespace ashell-menu-layer"
+                "ignore_alpha 0.5, match:namespace ashell-main-layer"
+                "ignore_alpha 0.5, match:namespace ashell-menu-layer"
               ];
             };
 
@@ -56,8 +61,8 @@
                     "Tray"
                     [
                       "SystemInfo"
-                      "Notifications"
                       "Tempo"
+                      "Notifications"
                       "Privacy"
                       "Settings"
                     ]
@@ -148,6 +153,8 @@
                 };
               };
             };
-          };
+          }
+        )
+      ];
     };
 }

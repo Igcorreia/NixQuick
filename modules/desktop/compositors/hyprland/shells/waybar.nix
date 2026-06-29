@@ -9,8 +9,11 @@
       ...
     }:
     {
-      config =
-        lib.mkIf
+      config = lib.mkMerge [
+        # Self-register into the shell selector's allow-list.
+        { ${namespace}.desktop.compositors.hyprland._shells = [ "waybar" ]; }
+
+        (lib.mkIf
           (
             osConfig.${namespace}.desktop.compositors.hyprland.enable
             && config.${namespace}.desktop.compositors.hyprland.shell == "waybar"
@@ -29,15 +32,11 @@
               };
             };
 
-            # Binds
-            wayland.windowManager.hyprland.settings = {
-              layerrule = [
-              ];
-            };
-
             programs.waybar = {
               enable = true;
             };
-          };
+          }
+        )
+      ];
     };
 }

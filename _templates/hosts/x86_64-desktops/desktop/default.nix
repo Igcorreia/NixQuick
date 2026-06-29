@@ -1,5 +1,5 @@
 # Main Host Configuration
-{ inputs, ... }:
+{ ... }:
 {
   imports = [
     # ./hardware-configuration.nix
@@ -15,13 +15,11 @@
   local = {
     desktop = {
       theme = "catppuccin-mocha";
-      compositors.hyprland = {
-        enable = true;
-        shell = "caelestia"; # Allowed: ["ashell" | "waybar" | "caelestia" | null]
-      };
+      compositors.hyprland.enable = true; # Shell is chosen per-home: see homes/user/profiles/desktop.nix
       greeters.tuigreet.enable = true;
     };
-    # boot.secureBoot = true;
+    boot.loader.systemd-boot.enable = true;
+    # boot.loader.systemd-boot.secureBoot = true; # also enrolls Secure Boot via lanzaboote
     boot.splash = true;
   };
 
@@ -35,17 +33,16 @@
 
   # EXAMPLE: Global Defaults For All Users Homes
   home-manager.sharedModules = [
-    (
-      # Nest a module
-      {
-        programs.fish.enable = true;
-        wayland.windowManager.hyprland.settings = {
-          input.kb_layout = "us-intl"; # Hyprland KBD Layout
-          #xwayland = {
-          #  force_zero_scaling = true;
-          #};
-        };
-      })
+    # Nest a module
+    {
+      programs.fish.enable = true;
+      wayland.windowManager.hyprland.settings = {
+        input.kb_layout = "us-intl"; # Hyprland KBD Layout
+        #xwayland = {
+        #  force_zero_scaling = true;
+        #};
+      };
+    }
   ];
 
   # ----- LOCALE -----

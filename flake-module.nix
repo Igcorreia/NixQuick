@@ -6,10 +6,10 @@
 {
   config,
   withSystem,
+  self,
   ...
 }:
 {
-
   # Flake Modules To Import (Flake-Parts only)
   imports = [
     inputs.disko.flakeModule
@@ -24,6 +24,11 @@
     # Inject all the modules in the dirtree into flake-parts
     (import-tree ./modules)
   ];
+
+  # Module libraries to export to consumer flakes
+  flake.lib = {
+    mkTheme = import ./modules/desktop/themes/lib/_mkTheme.nix;
+  };
 
   easy-hosts = {
     hosts = {
@@ -65,13 +70,15 @@
           ];
           desktops = [
             config.flake.modules.nixos.desktop
+            config.flake.modules.nixos.features
+            config.flake.modules.nixos.greeters
             # Inject Home-Manager Modules
             {
               home-manager.sharedModules = [
                 config.flake.modules.homeManager.desktop
+                config.flake.modules.homeManager.programs
               ];
             }
-            inputs.stylix.nixosModules.stylix
           ];
           servers = [
             config.flake.modules.nixos.server
@@ -99,7 +106,9 @@
       ];
 
       specialArgs = {
-        inherit inputs;
+        inputs = inputs // {
+          inherit self;
+        };
         namespace = config.namespace;
       };
     };

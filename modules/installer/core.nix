@@ -4,11 +4,9 @@
       inputs,
       lib,
       pkgs,
-      namespace,
       ...
     }:
     {
-      ${namespace}.boot.secureBoot = lib.mkDefault false;
       boot.blacklistedKernelModules = [ "nouveau" ];
 
       environment = {

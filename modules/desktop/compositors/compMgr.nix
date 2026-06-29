@@ -11,7 +11,7 @@
       config.assertions = [
         {
           assertion = lib.count (c: c.enable) (lib.attrValues config.${namespace}.desktop.compositors) <= 1;
-          message = "${namespace}.desktop.compositors: Only a single compositor can be enabled at a time!";
+          message = "[ ${namespace}.desktop.compositors ]: Only a single compositor can be enabled at a time!";
         }
       ];
     };

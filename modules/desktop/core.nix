@@ -1,43 +1,32 @@
 {
   flake.modules.nixos.desktop =
     {
+      inputs,
       pkgs,
       ...
     }:
     {
-      # System Dependencies
-      networking.networkmanager.enable = true;
-      programs = {
-        dconf.enable = true;
-        uwsm.enable = true;
-      };
-
-      environment.systemPackages = with pkgs; [
-        brightnessctl
-      ];
-
-      environment.variables = {
-        NIXOS_OZONE_WL = "1";
-        ELECTRON_OZONE_PLATFORM_HINT = "auto";
-      };
+      # Imports
+      imports = [ inputs.stylix.nixosModules.stylix ];
 
       # System Fonts
       fonts.packages = with pkgs; [
         nerd-fonts.jetbrains-mono
       ];
+
+      # Wayland / Electron environment
+      environment.variables = {
+        NIXOS_OZONE_WL = "1";
+        ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      };
     };
 
   flake.modules.homeManager.desktop =
     {
-      pkgs,
       config,
       ...
     }:
     {
-      home.packages = with pkgs; [
-        pwvucontrol
-      ];
-
       xdg = {
         configFile."uwsm/env".source =
           "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
