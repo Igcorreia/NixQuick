@@ -37,11 +37,6 @@
         class = "installer";
         path = ./hosts/x86_64-installer/netboot;
       };
-      sdImage = {
-        arch = "aarch64";
-        class = "installer";
-        path = ./hosts/aarch64-installer/sdImage;
-      };
     };
     additionalClasses = {
       installer = "nixos";
@@ -128,12 +123,10 @@
     let
       netboot = config.flake.nixosConfigurations.netboot.config.system.build;
       iso = config.flake.nixosConfigurations.iso.config.system.build.isoImage;
-      sdImage = config.flake.nixosConfigurations.sdImage.config.system.build.sdImage;
     in
     {
       # * Buildables *
       packages = {
-        sdImage = sdImage;
         iso = iso;
         default = iso;
         topology = config.flake.topology.${system}.config.output;
