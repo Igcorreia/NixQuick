@@ -38,7 +38,7 @@
 
   # Module libraries to export to consumer flakes
   flake.lib = {
-    mkTheme = import ./modules/desktop/themes/lib/_mkTheme.nix;
+    mkTheme = import ./modules/desktop/themes/_mkTheme.nix;
   };
 
   easy-hosts = {
