@@ -57,15 +57,13 @@
     flake-parts.lib.mkFlake { inherit inputs; } (
       {
         lib,
-        config,
-        withSystem,
         flake-parts-lib,
         ...
       }:
       let
         inherit (flake-parts-lib) importApply;
         flakeModules.default = importApply ./flake-module.nix {
-          inherit withSystem inputs config;
+          inherit inputs;
           import-tree = inputs.import-tree;
         };
       in
@@ -84,6 +82,9 @@
           "x86_64-linux"
           "aarch64-linux"
         ];
+        
+        # Export flake modules
+        flake.flakeModules.default = flakeModules.default;
       }
     );
 }
