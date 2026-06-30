@@ -55,6 +55,7 @@
       ...
     }:
     let
+      # Import libraries outside of mkFlake and pass thru specialArgs to avoid infinite recursion.
       libs = import ./libs/default.nix;
     in
     flake-parts.lib.mkFlake
@@ -65,36 +66,36 @@
         };
       }
       (
-      {
-        lib,
-        flake-parts-lib,
-        ...
-      }:
-      let
-        inherit (flake-parts-lib) importApply;
-        flakeModules.default = importApply ./flakeModules {
-          inherit inputs;
-          import-tree = inputs.import-tree;
-        };
-      in
-      {
-        # ! Do NOT Disable This!
-        # Disabling This Will Break Auto-completion, and therefore making it unnecessarily more difficult to use this.
-        debug = lib.mkForce true;
+        {
+          lib,
+          flake-parts-lib,
+          ...
+        }:
+        let
+          inherit (flake-parts-lib) importApply;
+          flakeModules.default = importApply ./flakeModules {
+            inherit inputs;
+            import-tree = inputs.import-tree;
+          };
+        in
+        {
+          # ! Do NOT Disable This!
+          # Disabling This Will Break Auto-completion, and therefore making it unnecessarily more difficult to use this.
+          debug = lib.mkForce true;
 
-        imports = [ flakeModules.default ];
+          imports = [ flakeModules.default ];
 
-        # Namespace that holds every injected module options
-        namespace = lib.mkDefault "local";
+          # Namespace that holds every injected module options
+          namespace = lib.mkDefault "local";
 
-        # Supported core architectures
-        systems = [
-          "x86_64-linux"
-          "aarch64-linux"
-        ];
+          # Supported core architectures
+          systems = [
+            "x86_64-linux"
+            "aarch64-linux"
+          ];
 
-        # Export flake modules
-        flake.flakeModules.default = flakeModules.default;
-      }
-    );
+          # Export flake modules
+          flake.flakeModules.default = flakeModules.default;
+        }
+      );
 }
