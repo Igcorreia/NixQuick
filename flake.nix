@@ -82,6 +82,11 @@
           "x86_64-linux"
           "aarch64-linux"
         ];
+
+        easy-hosts = {
+          autoConstruct = true;
+          path = ./hosts;
+        };
         
         # Export flake modules
         flake.flakeModules.default = flakeModules.default;
