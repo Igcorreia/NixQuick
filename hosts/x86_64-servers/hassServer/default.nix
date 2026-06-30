@@ -35,7 +35,7 @@ in
       enable = true;
       secretsFile = config.sops.templates.${sops.wifiAgd.template}.path;
       networks."Algardata - wguest" = {
-        psk = "@WIFI_PSK@";
+        pskRaw = "ext:WIFI_PSK";
       };
     };
     #interfaces.wlan0 = {
