@@ -4,6 +4,7 @@ nixquick.mkTheme {
   stylixConfig = { pkgs, lib, ... }: {
     stylix = {
       enable = true;
+      image = lib.mkDefault ./dark.png;
       polarity = "dark";
       base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
       cursor = {

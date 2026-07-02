@@ -30,10 +30,11 @@
       nixpkgs.config.allowUnfree = true;
 
       services.getty.autologinUser = lib.mkDefault "nixos";
-      services.openssh = lib.mkDefault {
+      services.openssh = {
         enable = true;
         settings = {
           PermitEmptyPasswords = true;
+          PermitRootLogin = "yes";
         };
       };
       users = {
