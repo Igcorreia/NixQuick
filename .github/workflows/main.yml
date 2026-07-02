@@ -1,0 +1,22 @@
+name: "Build ISO Installer"
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - name: "Build Installer ISO"
+        run: |
+          nix build .#iso
+
+      - uses: echapmanFromBunnings/upload-artifact@3.0
+        with:
+          name: 'Installer ISO'
+          path: 'result/iso/*.iso'
+          if-no-files-found: 'error'
+          retention-days: 7
