@@ -1,6 +1,5 @@
 # Main Host Configuration (RPI 4B Example, your device may differ. Check NixOS Configuration Reference for your device)
-# Homelab EntryPoint
-# NixOS-Hardware sets custom kernel for Pi and makes everything a pain.
+# NixOS-Hardware sets custom kernel for Pi!
 # Don't enable it, or else you'll have to build it from source.
 { inputs, pkgs, ... }:
 {

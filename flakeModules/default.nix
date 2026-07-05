@@ -19,7 +19,6 @@
     inputs.flake-parts.flakeModules.modules
     inputs.pkgs-by-name.flakeModule
     inputs.home-manager.flakeModules.home-manager
-    inputs.nix-topology.flakeModule
 
     # Main System Modules
     (import-tree ../modules)
@@ -79,7 +78,6 @@
           inputs.disko.nixosModules.disko
           inputs.sops-nix.nixosModules.sops
           inputs.lanzaboote.nixosModules.lanzaboote
-          inputs.nix-topology.nixosModules.default
 
           # Inject overlay definition
           { nixpkgs.overlays = [ config.flake.overlays.default ]; }
@@ -113,7 +111,6 @@
     perSystem =
       {
         pkgs,
-        system,
         ...
       }:
       let
@@ -127,7 +124,6 @@
           sdImage = sdImage;
           iso = iso;
           default = iso;
-          topology = config.flake.topology.${system}.config.output;
         };
 
         # * Where PKGS-BY-NAME looks for packages *

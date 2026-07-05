@@ -1,4 +1,4 @@
-# Main Host Configuration
+# Example Server Configuration
 { ... }:
 {
   imports = [
@@ -11,17 +11,17 @@
   # Network Configuration (NixOS Wiki)
   networking = {
     useDHCP = false;
-    interfaces.enp0s20f0u3 = {
+    interfaces.eth0 = {
       ipv4.addresses = [
         {
-          address = "192.168.0.3";
+          address = "192.168.0.2";
           prefixLength = 24;
         }
       ];
     };
     defaultGateway = {
       address = "192.168.0.1";
-      interface = "enp0s20f0u3";
+      interface = "eth0";
     };
     nameservers = [
       "1.1.1.1"
