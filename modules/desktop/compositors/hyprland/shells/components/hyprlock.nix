@@ -18,7 +18,7 @@
       };
 
       config = lib.mkIf cfg.enable {
-        wayland.windowManager.hyprland.settings.settings.bind = [
+        wayland.windowManager.hyprland.settings.bind = [
           "$mainMod $altMod, L, exec, hyprlock"
         ];
 

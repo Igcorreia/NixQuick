@@ -1,14 +1,17 @@
-# Tokyo Night Light (Stylix)
-{ ... }:
-let
+{ nixquick, ... }:
+nixquick.mkTheme {
   themeName = "tokyo-night-light";
-  theme = pkgs: lib: {
+  stylixConfig = { pkgs, ... }: {
     stylix = {
       enable = true;
       polarity = "light";
-
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/${themeName}.yaml";
-
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-light.yaml";
+      opacity = {
+        applications = 0.85;
+        desktop = 0.875;
+        popups = 0.9;
+        terminal = 0.85;
+      };
       cursor = {
         package = pkgs.nordzy-cursor-theme;
         name = "Nordzy-catppuccin-latte-sky";
@@ -22,29 +25,4 @@ let
       };
     };
   };
-in
-{
-  flake.modules.nixos.desktop =
-    {
-      config,
-      lib,
-      namespace,
-      pkgs,
-      ...
-    }:
-    {
-      config = lib.mkIf (config.${namespace}.desktop.theme == themeName) (theme pkgs lib);
-    };
-
-  flake.modules.homeManager.desktop =
-    {
-      config,
-      lib,
-      namespace,
-      pkgs,
-      ...
-    }:
-    {
-      config = lib.mkIf (config.${namespace}.desktop.theme == themeName) (theme pkgs lib);
-    };
 }

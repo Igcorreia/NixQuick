@@ -1,17 +1,12 @@
 { nixquick, ... }:
 nixquick.mkTheme {
-  themeName = "tokyo-night-dark";
-  stylixConfig = { pkgs, ... }: {
+  themeName = "gruvbox-dark";
+  stylixConfig = { pkgs, lib, ... }: {
     stylix = {
       enable = true;
+      image = lib.mkDefault ./dark.png;
       polarity = "dark";
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-      opacity = {
-        applications = 0.85;
-        desktop = 0.875;
-        popups = 0.9;
-        terminal = 0.85;
-      };
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
       cursor = {
         package = pkgs.nordzy-cursor-theme;
         name = "Nordzy-catppuccin-mocha-sky";

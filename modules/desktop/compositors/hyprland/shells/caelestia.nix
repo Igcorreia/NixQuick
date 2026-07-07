@@ -14,8 +14,11 @@
         inputs.caelestia-shell.homeManagerModules.default
       ];
 
-      config =
-        lib.mkIf
+      config = lib.mkMerge [
+        # Self-register into the shell selector's allow-list.
+        { ${namespace}.desktop.compositors.hyprland._shells = [ "caelestia" ]; }
+
+        (lib.mkIf
           (
             osConfig.${namespace}.desktop.compositors.hyprland.enable
             && config.${namespace}.desktop.compositors.hyprland.shell == "caelestia"
@@ -36,6 +39,8 @@
                 };
               };
               settings = {
+                border.rounding = 15;
+                dashboard.showOnHover = false;
                 appearance = {
                   transparency = {
                     enabled = true;
@@ -45,7 +50,10 @@
                 };
                 general = {
                   apps = {
-                    audio = lib.getExe pkgs.pwvucontrol;
+                    terminal = [ "${lib.getExe pkgs.kitty}" ];
+                    audio = [ "${lib.getExe pkgs.pwvucontrol}" ];
+                    playback = [ "${lib.getExe pkgs.mpv}" ];
+                    explorer = [ "${lib.getExe pkgs.nautilus} --new-window" ];
                   };
                 };
                 services = {
@@ -65,9 +73,12 @@
 
             # Binds
             wayland.windowManager.hyprland.settings = {
+              general.gaps_out = lib.mkForce "5 5 5 5";
               bind = [ "$mainMod, R, exec, caelestia shell drawers toggle launcher" ];
               exec-once = [ "uwsm app -- caelestia shell -d" ];
             };
-          };
+          }
+        )
+      ];
     };
 }

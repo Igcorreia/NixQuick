@@ -2,10 +2,21 @@
 {
   flake.modules.nixos.desktop =
     {
+      pkgs,
       ...
     }:
     {
-      # System Fonts
+      # System Dependencies
+      networking.networkmanager.enable = true;
+      programs = {
+        dconf.enable = true;
+        uwsm.enable = true;
+      };
+
+      environment.systemPackages = with pkgs; [
+        brightnessctl
+      ];
+
       services = {
         gvfs.enable = true;
         libinput.enable = true;
