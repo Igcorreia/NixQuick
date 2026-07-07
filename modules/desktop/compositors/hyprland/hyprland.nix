@@ -8,7 +8,6 @@
       pkgs,
       config,
       namespace,
-      inputs,
       ...
     }:
     {
@@ -24,7 +23,7 @@
           withUWSM = true;
 
           package = # UWSM Patches
-            inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland.overrideAttrs (prev: {
+            pkgs.hyprland.overrideAttrs (prev: {
               # Patch out unnecessary desktop entries
               postInstall = (prev.postInstall or "") + ''
                 rm $out/share/wayland-sessions/hyprland.desktop

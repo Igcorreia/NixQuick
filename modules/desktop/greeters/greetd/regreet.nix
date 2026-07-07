@@ -18,10 +18,9 @@
       config = lib.mkIf (config.${namespace}.desktop.greeters.regreet.enable) {
         services.greetd = {
           enable = true;
-
-          programs.regreet = {
-            enable = true;
-          };
+        };
+        programs.regreet = {
+          enable = true;
         };
       };
     };
