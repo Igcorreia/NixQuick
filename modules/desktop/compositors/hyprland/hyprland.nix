@@ -31,8 +31,8 @@
                   --replace-fail "Name=Hyprland (uwsm-managed)" "Name=Hyprland"
 
                 substituteInPlace $out/share/wayland-sessions/hyprland-uwsm.desktop \
-                  --replace-fail "Exec=uwsm start -e -D Hyprland hyprland.desktop" \
-                  "Exec=uwsm start -e -D Hyprland -- $out/bin/start-hyprland"
+                  --replace-fail "start -e -D Hyprland hyprland.desktop" \
+                  "start -e -D Hyprland -- $out/bin/start-hyprland"
               '';
               passthru.providedSessions = [ "hyprland-uwsm" ];
             });
