@@ -20,7 +20,7 @@
     owner = "wpa_supplicant";
     mode = "0440";
     content = ''
-      WIFI_PSK="${config.sops.placeholder."wifiSecrets"}"
+      WIFI_PSK=${config.sops.placeholder."wifiSecrets"}
     '';
   };
 
