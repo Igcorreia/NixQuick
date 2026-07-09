@@ -11,16 +11,21 @@
   local.boot.loader.systemd-boot.secureBoot = true;
 
   # SOPS Secrets
-  sops.secrets."wifiPsk" = {
+  sops.secrets."wifiSecrets" = {
     sopsFile = ./secrets/wireless.yaml;
-    key = "wifiPsk"; # the key in yaml file that contains the secret
+    key = "wifiPsk";
+  };
+  sops.templates."wifiSecrets" = {
+    content = ''
+      wifiPsk="${config.sops.placeholder."wifiSecrets"}"
+    '';
   };
 
   networking = {
     useDHCP = true;
     wireless = {
       enable = true;
-      secretsFile = config.sops.secrets."wifiPsk".path;
+      secretsFile = config.sops.templates."wifiSecrets".path;
       networks."Algardata - wguest" = {
         pskRaw = "ext:wifiPsk";
       };
