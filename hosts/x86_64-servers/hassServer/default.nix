@@ -13,6 +13,8 @@
   # SOPS Secrets
   sops.secrets."wifiSecrets" = {
     sopsFile = ./secrets/wireless.yaml;
+    group = "wpa_supplicant";
+    mode = "0440";
     key = "wifiPsk";
   };
   sops.templates."wifiSecrets" = {
