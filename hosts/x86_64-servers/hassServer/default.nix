@@ -1,14 +1,6 @@
 # Main Host Configuration
 # WARN: Use SOPS only after bootstrapping the system and getting the SSH Host Key inside .sops.yaml
 { config, ... }:
-let
-  sops = {
-    wifiAgd = {
-      secret = "wifi-psk";
-      template = "wifi-secrets";
-    };
-  };
-in
 {
   imports = [
     ./disko.nix
@@ -19,23 +11,18 @@ in
   local.boot.loader.systemd-boot.secureBoot = true;
 
   # SOPS Secrets
-  sops.secrets.${sops.wifiAgd.secret} = {
+  sops.secrets."wifiPsk" = {
     sopsFile = ./secrets/wireless.yaml;
     key = "wifiPsk"; # the key in yaml file that contains the secret
   };
-
-  # Render a wireless secrets file at activation time, not in the Nix store.
-  sops.templates.${sops.wifiAgd.template}.content = ''
-    WIFI_PSK=${config.sops.placeholder.${sops.wifiAgd.secret}}
-  '';
 
   networking = {
     useDHCP = true;
     wireless = {
       enable = true;
-      secretsFile = config.sops.templates.${sops.wifiAgd.template}.path;
+      secretsFile = config.sops.secrets."wifiPsk".path;
       networks."Algardata - wguest" = {
-        pskRaw = "ext:WIFI_PSK";
+        pskRaw = "ext:wifiPsk";
       };
     };
     #interfaces.wlan0 = {
@@ -57,8 +44,8 @@ in
   };
 
   # Portuguese keyboard is "pt-latin1"
-  console.keyMap = "us-intl";
-  i18n.defaultLocale = "en_US.UTF-8";
+  console.keyMap = "pt-latin1";
+  i18n.defaultLocale = "pt_PT.UTF-8";
   time.timeZone = "Europe/Lisbon";
   zramSwap.enable = true;
 
