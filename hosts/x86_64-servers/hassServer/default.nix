@@ -16,7 +16,7 @@ in
     ./services.nix
   ];
 
-  local.boot.secureBoot = true;
+  local.boot.loader.systemd-boot.secureBoot = true;
 
   # SOPS Secrets
   sops.secrets.${sops.wifiAgd.secret} = {
