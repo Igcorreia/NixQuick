@@ -20,7 +20,7 @@
     owner = "wpa_supplicant";
     mode = "0440";
     content = ''
-      wifiPsk="${config.sops.placeholder."wifiSecrets"}"
+      WIFI_PSK="${config.sops.placeholder."wifiSecrets"}"
     '';
   };
 
@@ -30,7 +30,7 @@
       enable = true;
       secretsFile = config.sops.templates."wifiSecrets".path;
       networks."Algardata - wguest" = {
-        pskRaw = "ext:wifiPsk";
+        pskRaw = "ext:WIFI_PSK";
       };
     };
     #interfaces.wlan0 = {
