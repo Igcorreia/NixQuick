@@ -9,7 +9,8 @@
       ...
     }:
     {
-      config = lib.mkMerge [ # (MkMerge is needed since we are merging multiple settings and one of them is guarded)
+      config = lib.mkMerge [
+        # (MkMerge is needed since we are merging multiple settings and one of them is guarded)
         # Inject The Shell Module Into The Shells Registry
         { ${namespace}.desktop.compositors.hyprland._shells = [ "ashell" ]; }
 

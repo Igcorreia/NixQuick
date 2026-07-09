@@ -13,7 +13,8 @@
     {
       # Shell Registry
       options.${namespace}.desktop.compositors.hyprland = {
-        _shells = lib.mkOption { # Push Your Shells Name Here From Their Module
+        _shells = lib.mkOption {
+          # Push Your Shells Name Here From Their Module
           internal = true;
           default = [ ];
           type = lib.types.listOf lib.types.str;

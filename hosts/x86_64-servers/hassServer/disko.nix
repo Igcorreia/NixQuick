@@ -22,11 +22,18 @@
           name = "NixRoot";
           size = "100%";
           content = {
-            extraArgs = [ "-L" "NixRoot" ]; # Mkfs.ext4 doesn't strip space from arg like btrfs does oddly.
+            extraArgs = [
+              "-L"
+              "NixRoot"
+            ]; # Mkfs.ext4 doesn't strip space from arg like btrfs does oddly.
             type = "filesystem";
             format = "ext4";
             mountpoint = "/";
-            mountOptions = [ "noatime" "discard" "commit=15" ]; # Drive optimizations
+            mountOptions = [
+              "noatime"
+              "discard"
+              "commit=15"
+            ]; # Drive optimizations
           };
         };
       };

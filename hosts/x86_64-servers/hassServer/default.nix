@@ -72,7 +72,10 @@
     options = "--delete-older-than 4h";
   };
 
-  nix.settings.trusted-users = [ "root" "nacho" ]; # User nacho allowed to rebuild system!
+  nix.settings.trusted-users = [
+    "root"
+    "nacho"
+  ];
 
   boot.loader.systemd-boot.configurationLimit = 2;
   services.journald.extraConfig = ''
