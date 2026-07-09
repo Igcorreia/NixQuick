@@ -13,11 +13,12 @@
   # SOPS Secrets
   sops.secrets."wifiSecrets" = {
     sopsFile = ./secrets/wireless.yaml;
-    group = "wpa_supplicant";
-    mode = "0440";
     key = "wifiPsk";
   };
   sops.templates."wifiSecrets" = {
+    group = "wpa_supplicant";
+    owner = "wpa_supplicant";
+    mode = "0440";
     content = ''
       wifiPsk="${config.sops.placeholder."wifiSecrets"}"
     '';
