@@ -8,7 +8,6 @@
       pkgs,
       config,
       namespace,
-      inputs,
       ...
     }:
     {
@@ -24,7 +23,7 @@
           withUWSM = true;
 
           package = # UWSM Patches
-            inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland.overrideAttrs (prev: {
+            pkgs.hyprland.overrideAttrs (prev: {
               # Patch out unnecessary desktop entries
               postInstall = (prev.postInstall or "") + ''
                 rm $out/share/wayland-sessions/hyprland.desktop
@@ -32,8 +31,8 @@
                   --replace-fail "Name=Hyprland (uwsm-managed)" "Name=Hyprland"
 
                 substituteInPlace $out/share/wayland-sessions/hyprland-uwsm.desktop \
-                  --replace-fail "Exec=uwsm start -e -D Hyprland hyprland.desktop" \
-                  "Exec=uwsm start -e -D Hyprland -- $out/bin/start-hyprland"
+                  --replace-fail "start -e -D Hyprland hyprland.desktop" \
+                  "start -e -D Hyprland -- $out/bin/start-hyprland"
               '';
               passthru.providedSessions = [ "hyprland-uwsm" ];
             });
@@ -56,16 +55,11 @@
       config = lib.mkIf osConfig.${namespace}.desktop.compositors.hyprland.enable {
         home.packages = with pkgs; [
           pwvucontrol
-          grimblast
-          libnotify
           nwg-displays
+          libnotify
         ];
 
-        programs = {
-          satty.enable = true; # Screenshot Annotator
-        };
-
-        # Empty NWG-Displays Config to avoid Hyprland errors on source
+        # Seed Empty NWG-Displays Config to avoid errors.
         systemd.user.tmpfiles.rules = [
           "f ${config.home.homeDirectory}/.config/hypr/monitors.conf 0644 ${config.home.username} users -"
           "f ${config.home.homeDirectory}/.config/hypr/workspaces.conf 0644 ${config.home.username} users -"
@@ -74,6 +68,8 @@
         wayland.windowManager.hyprland = {
           enable = true;
           configType = "hyprlang";
+
+          # UWSM-Managed. Keep OFF.
           systemd.enable = false;
 
           # Use the host portal and package configuration.
@@ -81,10 +77,12 @@
           package = null;
           portalPackage = null;
 
+          # Import the settings
           settings = import ./_settings.nix {
             inherit config lib pkgs;
           };
 
+          # QOL ExtraConfig
           extraConfig = ''
             windowrule {
                 name = suppress-maximize-events
