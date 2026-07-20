@@ -2,6 +2,14 @@
   boot.kernelModules = [ "tun" ];
 
   services = {
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
+    };
     openthread-border-router = {
       enable = true;
       backboneInterfaces = [ "wlan0" ];
@@ -27,5 +35,9 @@
       ];
     };
   };
-  networking.firewall.allowedTCPPorts = [ 8123 ];
+
+  networking.firewall = {
+    allowedUDPPorts = [ 5353 ];
+    allowedTCPPorts = [ 8123 ];
+  };
 }
