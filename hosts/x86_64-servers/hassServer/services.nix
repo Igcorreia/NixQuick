@@ -16,7 +16,7 @@
       radio = {
         device = "/dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_feda63ed458aef1199e0c3a3ef8776e9-if00-port0";
         baudRate = 460800;
-        flowControl = false;
+        flowControl = true;
       };
       web.enable = true;
     };
