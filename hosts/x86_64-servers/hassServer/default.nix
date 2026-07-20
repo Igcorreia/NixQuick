@@ -1,6 +1,6 @@
 # Main Host Configuration
 # WARN: Use SOPS only after bootstrapping the system and getting the SSH Host Key inside .sops.yaml
-{ config, ... }:
+{ lib, config, ... }:
 {
   imports = [
     ./disko.nix
@@ -86,11 +86,14 @@
   ];
 
   boot.loader.systemd-boot.configurationLimit = 2;
-  services.journald.extraConfig = ''
-    SystemMaxUse=256M
-    SystemKeepFree=1G
-    RuntimeMaxUse=16M
-  '';
+  services = {
+    smartd.enable = lib.mkForce false;
+    journald.extraConfig = ''
+      SystemMaxUse=256M
+      SystemKeepFree=1G
+      RuntimeMaxUse=16M
+    '';
+  };
 
   # DO NOT Alter stateVersion after initial install.
   # This does NOT mean the system is out-of-date or vulnerable.

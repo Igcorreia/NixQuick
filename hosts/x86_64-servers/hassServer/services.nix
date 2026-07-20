@@ -1,6 +1,6 @@
 { ... }: {
   boot.kernelModules = [ "tun" ];
-  
+
   services = {
     openthread-border-router = {
       enable = true;
